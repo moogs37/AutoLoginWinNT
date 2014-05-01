@@ -17,11 +17,21 @@ namespace AutoLoginWinNT
         public Form1()
         {
             InitializeComponent();
-            ListViewItem lvi = new ListViewItem("TEST");
-            lvi.SubItems.Add("Subitem");
-            listView1.Items.Add(lvi);
+            ListViewItem listAutoAdminLogon = new ListViewItem("AutoAdminLogon");
+            listAutoAdminLogon.SubItems.Add(GetAutoAdminLogin());
+            listView1.Items.Add(listAutoAdminLogon);
 
-            
+            ListViewItem listDefaultUserName = new ListViewItem("DefaultUserName");
+            listDefaultUserName.SubItems.Add(GetDefaultUserName());
+            listView1.Items.Add(listDefaultUserName);
+
+            ListViewItem listDefaultPassword = new ListViewItem("DefaultPassword");
+            listDefaultPassword.SubItems.Add(GetDefaultPassword());
+            listView1.Items.Add(listDefaultPassword);
+
+            ListViewItem listDefaultDomainName = new ListViewItem("DefaultDomainName");
+            listDefaultDomainName.SubItems.Add(GetDefaultDomainName());
+            listView1.Items.Add(listDefaultDomainName);
 
         }
         public string GetAutoAdminLogin()
