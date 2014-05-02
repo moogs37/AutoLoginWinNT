@@ -23,6 +23,26 @@ namespace AutoLoginWinNT
            defaultPasswordCVTB.Text = GetDefaultPassword();
            defaultDomainNameCVTB.Text = GetDefaultDomainName();
         }
+        public string setAutoAdminLogon()
+        {
+            string newAutoAdminLogon = autoAdminLogonNVTB.Text;
+            return newAutoAdminLogon;
+        }
+        public string setDefaultUserName()
+        {
+            string newDefaultUserName = defaultDomainNameNVTB.Text;
+            return newDefaultUserName;
+        }
+        public string setDefaultPassword()
+        {
+            string newDefaultPassword = defaultPasswordNVTB.Text;
+            return newDefaultPassword;
+        }
+        public string setDefaultDomainName()
+        {
+            string newDefaultDomainName = defaultDomainNameNVTB.Text;
+            return newDefaultDomainName;
+        }
         public string GetAutoAdminLogin()
         {
             const string userRoot = "HKEY_LOCAL_MACHINE";
@@ -89,6 +109,19 @@ namespace AutoLoginWinNT
        private void Form1_Load_1(object sender, EventArgs e)
        {
 
+       }
+
+       private void button1_Click(object sender, EventArgs e)
+       {
+           const string userRoot = "HKEY_LOCAL_MACHINE";
+           const string subkey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon";
+           const string keyName = userRoot + "\\" + subkey;
+
+           // Passing values on user click
+           Registry.SetValue(keyName, "AutoAdminLogon", setAutoAdminLogon(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultUserName", setDefaultUserName(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultPassword", setDefaultPassword(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultDomainName", setDefaultDomainName(), RegistryValueKind.String);
        }
 
     }
