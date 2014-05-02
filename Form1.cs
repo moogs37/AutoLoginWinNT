@@ -16,23 +16,12 @@ namespace AutoLoginWinNT
     {
         public Form1()
         {
-            InitializeComponent();
-            ListViewItem listAutoAdminLogon = new ListViewItem("AutoAdminLogon");
-            listAutoAdminLogon.SubItems.Add(GetAutoAdminLogin());
-            listView1.Items.Add(listAutoAdminLogon);
-
-            ListViewItem listDefaultUserName = new ListViewItem("DefaultUserName");
-            listDefaultUserName.SubItems.Add(GetDefaultUserName());
-            listView1.Items.Add(listDefaultUserName);
-
-            ListViewItem listDefaultPassword = new ListViewItem("DefaultPassword");
-            listDefaultPassword.SubItems.Add(GetDefaultPassword());
-            listView1.Items.Add(listDefaultPassword);
-
-            ListViewItem listDefaultDomainName = new ListViewItem("DefaultDomainName");
-            listDefaultDomainName.SubItems.Add(GetDefaultDomainName());
-            listView1.Items.Add(listDefaultDomainName);
-
+           InitializeComponent();
+           // Displaying all the current registry settings
+           autoAdminLogonCVTB.Text = GetAutoAdminLogin();
+           defaultUserNameCVTB.Text = GetDefaultUserName();
+           defaultPasswordCVTB.Text = GetDefaultPassword();
+           defaultDomainNameCVTB.Text = GetDefaultDomainName();
         }
         public string GetAutoAdminLogin()
         {
@@ -74,9 +63,6 @@ namespace AutoLoginWinNT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ListViewItem AutoAdminLogonRow = new ListViewItem("Auto Admin Logon");
-            AutoAdminLogonRow.SubItems.Add(GetAutoAdminLogin());
-
         }
 
        private void label1_Click(object sender, EventArgs e)
@@ -86,7 +72,23 @@ namespace AutoLoginWinNT
 
        private void button2_Click(object sender, EventArgs e)
        {
-           Application.Exit();  // Exit application
+           // Exit application
+           Application.Exit();                                                                          
+       }
+
+       private void label1_Click_1(object sender, EventArgs e)
+       {
+
+       }
+
+       private void label1_Click_2(object sender, EventArgs e)
+       {
+
+       }
+
+       private void Form1_Load_1(object sender, EventArgs e)
+       {
+
        }
 
     }
