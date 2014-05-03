@@ -20,6 +20,7 @@ namespace AutoLoginWinNT
             ListViewItem listAutoAdminLogon = new ListViewItem("AutoAdminLogon");
             listAutoAdminLogon.SubItems.Add(GetAutoAdminLogin());
             listView1.Items.Add(listAutoAdminLogon);
+            NewValue.ListView.LabelEdit = true;
 
             ListViewItem listDefaultUserName = new ListViewItem("DefaultUserName");
             listDefaultUserName.SubItems.Add(GetDefaultUserName());
@@ -74,11 +75,15 @@ namespace AutoLoginWinNT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ListViewItem AutoAdminLogonRow = new ListViewItem("Auto Admin Logon");
-            AutoAdminLogonRow.SubItems.Add(GetAutoAdminLogin());
-
+            listView1.LabelEdit = true;
         }
-
+        private void listView1_DoubleClick(object sender, System.EventArgs e)
+        {
+            if (this.listView1.SelectedItems.Count == 1)
+            {
+                this.listView1.SelectedItems[0].BeginEdit();
+            }
+        }
        private void label1_Click(object sender, EventArgs e)
         {
 
