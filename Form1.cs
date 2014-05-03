@@ -22,6 +22,13 @@ namespace AutoLoginWinNT
            defaultUserNameCVTB.Text = GetDefaultUserName();
            defaultPasswordCVTB.Text = GetDefaultPassword();
            defaultDomainNameCVTB.Text = GetDefaultDomainName();
+
+            //Read only display
+           autoAdminLogonCVTB.ReadOnly = true;
+           defaultUserNameCVTB.ReadOnly = true;
+           defaultPasswordCVTB.ReadOnly = true;
+           defaultDomainNameCVTB.ReadOnly = true;
+
         }
         public string setAutoAdminLogon()
         {
@@ -30,7 +37,7 @@ namespace AutoLoginWinNT
         }
         public string setDefaultUserName()
         {
-            string newDefaultUserName = defaultDomainNameNVTB.Text;
+            string newDefaultUserName = defaultUserNameNVTB.Text;
             return newDefaultUserName;
         }
         public string setDefaultPassword()
