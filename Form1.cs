@@ -9,31 +9,44 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-
 namespace AutoLoginWinNT
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
-            InitializeComponent();
-            ListViewItem listAutoAdminLogon = new ListViewItem("AutoAdminLogon");
-            listAutoAdminLogon.SubItems.Add(GetAutoAdminLogin());
-            listView1.Items.Add(listAutoAdminLogon);
-            NewValue.ListView.LabelEdit = true;
+           InitializeComponent();
+           // Displaying all the current registry settings
+           autoAdminLogonCVTB.Text = GetAutoAdminLogin();
+           defaultUserNameCVTB.Text = GetDefaultUserName();
+           defaultPasswordCVTB.Text = GetDefaultPassword();
+           defaultDomainNameCVTB.Text = GetDefaultDomainName();
 
-            ListViewItem listDefaultUserName = new ListViewItem("DefaultUserName");
-            listDefaultUserName.SubItems.Add(GetDefaultUserName());
-            listView1.Items.Add(listDefaultUserName);
-
-            ListViewItem listDefaultPassword = new ListViewItem("DefaultPassword");
-            listDefaultPassword.SubItems.Add(GetDefaultPassword());
-            listView1.Items.Add(listDefaultPassword);
-
-            ListViewItem listDefaultDomainName = new ListViewItem("DefaultDomainName");
-            listDefaultDomainName.SubItems.Add(GetDefaultDomainName());
-            listView1.Items.Add(listDefaultDomainName);
-
+            //Read only display
+           autoAdminLogonCVTB.ReadOnly = true;
+           defaultUserNameCVTB.ReadOnly = true;
+           defaultPasswordCVTB.ReadOnly = true;
+           defaultDomainNameCVTB.ReadOnly = true;
+        }
+        public string setAutoAdminLogon()
+        {
+            string newAutoAdminLogon = autoAdminLogonNVTB.Text;
+            return newAutoAdminLogon;
+        }
+        public string setDefaultUserName()
+        {
+            string newDefaultUserName = defaultUserNameNVTB.Text;
+            return newDefaultUserName;
+        }
+        public string setDefaultPassword()
+        {
+            string newDefaultPassword = defaultPasswordNVTB.Text;
+            return newDefaultPassword;
+        }
+        public string setDefaultDomainName()
+        {
+            string newDefaultDomainName = defaultDomainNameNVTB.Text;
+            return newDefaultDomainName;
         }
         public string GetAutoAdminLogin()
         {
@@ -75,15 +88,9 @@ namespace AutoLoginWinNT
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listView1.LabelEdit = true;
+
         }
-        private void listView1_DoubleClick(object sender, System.EventArgs e)
-        {
-            if (this.listView1.SelectedItems.Count == 1)
-            {
-                this.listView1.SelectedItems[0].BeginEdit();
-            }
-        }
+
        private void label1_Click(object sender, EventArgs e)
         {
 
@@ -91,7 +98,54 @@ namespace AutoLoginWinNT
 
        private void button2_Click(object sender, EventArgs e)
        {
-           Application.Exit();  // Exit application
+           // Exit application
+           Application.Exit();                                                                          
+       }
+
+       private void label1_Click_1(object sender, EventArgs e)
+       {
+
+       }
+
+       private void label1_Click_2(object sender, EventArgs e)
+       {
+
+       }
+
+       private void Form1_Load_1(object sender, EventArgs e)
+       {
+
+       }
+       public void processRequest()
+       {
+           if (string.IsNullOrWhiteSpace(this.autoAdminLogonNVTB.Text) &&
+               string.IsNullOrWhiteSpace(this.defaultDomainNameNVTB.Text) &&
+               string.IsNullOrWhiteSpace(this.defaultPasswordNVTB.Text) &&
+               string.IsNullOrWhiteSpace(this.defaultDomainNameNVTB.Text))
+           {    DialogResult result = MessageBox.Show("No data was entered into the system.  By clicking Yes, you will erase all previously stored values.  Proceed?", "Warning",
+                   MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    setValues();
+                }
+           }
+           else setValues();
+       }
+       public void setValues()
+       {
+           const string userRoot = "HKEY_LOCAL_MACHINE";
+           const string subkey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon";
+           const string keyName = userRoot + "\\" + subkey;
+
+           // Passing values on user click
+           Registry.SetValue(keyName, "AutoAdminLogon", setAutoAdminLogon(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultUserName", setDefaultUserName(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultPassword", setDefaultPassword(), RegistryValueKind.String);
+           Registry.SetValue(keyName, "DefaultDomainName", setDefaultDomainName(), RegistryValueKind.String);
+       }
+       private void button1_Click(object sender, EventArgs e)
+       {
+           processRequest();
        }
 
     }
