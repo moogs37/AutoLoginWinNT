@@ -45,6 +45,7 @@
             this.defaultUserNameNVTB = new System.Windows.Forms.TextBox();
             this.defaultPasswordNVTB = new System.Windows.Forms.TextBox();
             this.defaultDomainNameNVTB = new System.Windows.Forms.TextBox();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -191,11 +192,22 @@
             this.defaultDomainNameNVTB.Size = new System.Drawing.Size(100, 20);
             this.defaultDomainNameNVTB.TabIndex = 23;
             // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.Location = new System.Drawing.Point(208, 181);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(45, 16);
+            this.statusLabel.TabIndex = 24;
+            this.statusLabel.Text = "Status";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 205);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.defaultDomainNameNVTB);
             this.Controls.Add(this.defaultPasswordNVTB);
             this.Controls.Add(this.defaultUserNameNVTB);
@@ -240,6 +252,7 @@
         private System.Windows.Forms.TextBox defaultUserNameNVTB;
         private System.Windows.Forms.TextBox defaultPasswordNVTB;
         private System.Windows.Forms.TextBox defaultDomainNameNVTB;
+        private System.Windows.Forms.Label statusLabel;
     }
 }
 

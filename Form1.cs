@@ -16,17 +16,12 @@ namespace AutoLoginWinNT
         public Form1()
         {
            InitializeComponent();
-           // Displaying all the current registry settings
-           autoAdminLogonCVTB.Text = GetAutoAdminLogin();
-           defaultUserNameCVTB.Text = GetDefaultUserName();
-           defaultPasswordCVTB.Text = GetDefaultPassword();
-           defaultDomainNameCVTB.Text = GetDefaultDomainName();
 
-            //Read only display
-           autoAdminLogonCVTB.ReadOnly = true;
-           defaultUserNameCVTB.ReadOnly = true;
-           defaultPasswordCVTB.ReadOnly = true;
-           defaultDomainNameCVTB.ReadOnly = true;
+           //Status display
+           statusLabel.Text = "Status: Waiting on user...";
+
+           getValues();
+           
         }
         public string setAutoAdminLogon()
         {
@@ -80,7 +75,24 @@ namespace AutoLoginWinNT
             string adminValue = Registry.GetValue(keyName, "DefaultDomainName", "Undefined").ToString();
             return adminValue;
         }
+        public void getValues()
+        {
+            // Displaying all the current registry settings
+            autoAdminLogonCVTB.Text = GetAutoAdminLogin();
+            defaultUserNameCVTB.Text = GetDefaultUserName();
+            defaultPasswordCVTB.Text = GetDefaultPassword();
+            defaultDomainNameCVTB.Text = GetDefaultDomainName();
 
+            //Read only display
+            autoAdminLogonCVTB.ReadOnly = true;
+            defaultUserNameCVTB.ReadOnly = true;
+            defaultPasswordCVTB.ReadOnly = true;
+            defaultDomainNameCVTB.ReadOnly = true;
+
+            //Initializing default values for some
+            autoAdminLogonNVTB.Text = "1";
+            defaultDomainNameNVTB.Text = "MCGHI2";
+        }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             return;
@@ -142,10 +154,14 @@ namespace AutoLoginWinNT
            Registry.SetValue(keyName, "DefaultUserName", setDefaultUserName(), RegistryValueKind.String);
            Registry.SetValue(keyName, "DefaultPassword", setDefaultPassword(), RegistryValueKind.String);
            Registry.SetValue(keyName, "DefaultDomainName", setDefaultDomainName(), RegistryValueKind.String);
+
+           //Status display
+           statusLabel.Text = "Status: Values executed.";
        }
        private void button1_Click(object sender, EventArgs e)
        {
            processRequest();
+           getValues();
        }
 
     }
