@@ -91,7 +91,7 @@ namespace AutoLoginWinNT
 
             //Initializing default values for some
             autoAdminLogonNVTB.Text = "1";
-            defaultDomainNameNVTB.Text = "MCGHI2";
+            defaultDomainNameNVTB.Text = "";
         }
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
